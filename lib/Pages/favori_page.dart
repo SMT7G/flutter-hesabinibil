@@ -64,7 +64,7 @@ class _favori_pageState extends State<favori_page> {
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("Kayıt başarılı bir şekilde silindi!"),
+                          content: Text("Kayıt başarılı bir şekilde silindiiiii!"),
                           duration: Duration(seconds: 3),
                         ),
                       );
