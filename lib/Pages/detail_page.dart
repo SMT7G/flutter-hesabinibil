@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hesabini_bil_demo/Hesapdao.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -15,8 +16,8 @@ class detail_page extends StatefulWidget {
 }
 
 class _detail_pageState extends State<detail_page> {
-  Future<void> favoriGuncelle(int id, String tutar) async {
-    await Hesapdao().favoriGuncelle(tutar, id);
+  Future<void> favoriGuncelle(int note_id, int id) async {
+    await Hesapdao().favoriGuncelle(note_id, id);
   }
 
   @override
@@ -29,83 +30,75 @@ class _detail_pageState extends State<detail_page> {
           title: Text("Detay Sayfası"),
         ),
         body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white70,
-              borderRadius: BorderRadius.circular(30),
-            ),
-            height: (device_height - 15) * 0.8,
-            width: (device_width) * 0.8,
-            child: Column(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  height: device_height * 0.69,
+                  width: device_width * 0.9,
+                  decoration: BoxDecoration(
+                    color: HexColor('#00478d'),
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      width: 2,
                       color: HexColor('#E37B1F'),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
                     ),
-                    height: device_height * 0.5,
-                    width: device_width * 0.6,
-                    child: Column(
-                      children: <Widget>[
-                        widget.note.kategori == 1
-                            ? Align(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    "- ${widget.note.tutar} TL",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 23),
-                                  ),
-                                ),
-                                alignment: Alignment.topLeft,
-                              )
-                            : widget.note.kategori == 2
-                                ? Align(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Text(
-                                        "- ${widget.note.tutar} TL",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 23),
+                  ),
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Tutar:",
+                                style: TextStyle(
+                                    color: HexColor('E37B1F'), fontSize: 23),
+                              ),
+                              Spacer(),
+                              widget.note.kategori == 1
+                                  ? Align(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(
+                                          "- ${widget.note.tutar} TL",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22),
+                                        ),
                                       ),
-                                    ),
-                                    alignment: Alignment.topLeft,
-                                  )
-                                : widget.note.kategori == 3
-                                    ? Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
+                                      alignment: Alignment.topLeft,
+                                    )
+                                  : widget.note.kategori == 2
+                                      ? Align(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Text(
                                               "- ${widget.note.tutar} TL",
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 23)),
-                                        ),
-                                      )
-                                    : widget.note.kategori == 4
-                                        ? Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                  "+ ${widget.note.tutar} TL",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 23)),
+                                                  fontSize: 22),
                                             ),
-                                          )
-                                        : widget.note.kategori == 5
-                                            ? Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Align(
+                                          ),
+                                          alignment: Alignment.topLeft,
+                                        )
+                                      : widget.note.kategori == 3
+                                          ? Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                    "- ${widget.note.tutar} TL",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 22)),
+                                              ),
+                                            )
+                                          : widget.note.kategori == 4
+                                              ? Align(
                                                   alignment: Alignment.topLeft,
                                                   child: Padding(
                                                     padding:
@@ -115,86 +108,175 @@ class _detail_pageState extends State<detail_page> {
                                                         "+ ${widget.note.tutar} TL",
                                                         style: TextStyle(
                                                             color: Colors.white,
-                                                            fontSize: 23)),
+                                                            fontSize: 22)),
                                                   ),
-                                                ),
-                                              )
-                                            : widget.note.kategori == 6
-                                                ? Align(
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                    child: Text(
-                                                        "+ ${widget.note.tutar} TL",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 23)),
-                                                  )
-                                                : Text(""),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              "Tarih: ${widget.note.dateTime}",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
+                                                )
+                                              : widget.note.kategori == 5
+                                                  ? Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Text(
+                                                              "+ ${widget.note.tutar} TL",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      22)),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : widget.note.kategori == 6
+                                                      ? Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                              "+ ${widget.note.tutar} TL",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      22)),
+                                                        )
+                                                      : Text(""),
+                            ],
                           ),
-                        ),
-                        Divider(
-                          color: Colors.white70,
-                          height: 2,
-                          thickness: 2,
-                        ),
-                        Spacer(),
-                        Text(
-                          "Favorilerime Ekle",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            print("Okay");
-                            setState(() {
-                              favoriGuncelle(1, widget.note.tutar);
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("Kayıt favorilere eklendi!"),
-                                duration: Duration(seconds: 3),
+                          buildSizedBox(),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Tarih: ",
+                                style: TextStyle(
+                                    color: HexColor('#E37B1F'), fontSize: 23),
                               ),
-                            );
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.bookmark_border_outlined,
-                            size: 35,
+                              Spacer(),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    "${widget.note.dateTime}",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 22),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.black, width: 2),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 60),
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.blue,
+                          buildSizedBox(),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Kategori: ",
+                                style: TextStyle(
+                                    color: HexColor('#E37B1F'), fontSize: 23),
+                              ),
+                              Spacer(),
+                              widget.note.kategori == 1
+                                  ? Text(
+                                      "Yemek",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    )
+                                  : widget.note.kategori == 2
+                                      ? Text("Eğlence",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20))
+                                      : widget.note.kategori == 3
+                                          ? Text("Araç",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20))
+                                          : widget.note.kategori == 4
+                                              ? Text("Aylık",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20))
+                                              : widget.note.kategori == 5
+                                                  ? Text("Fazla Mesai Ücreti",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20))
+                                                  : widget.note.kategori == 6
+                                                      ? Text("Avanta",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20))
+                                                      : Text(""),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    print("Okay");
+                    setState(() {
+                      favoriGuncelle(widget.note.note_id, 1);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Kayıt favorilere eklendi!"),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    child: Center(
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            Icons.bookmark_border_outlined,
+                            size: 60,
+                            color: Colors.white,
+                          ),
+                          Spacer(),
+                          Text(
+                            "Favorilere Ekle",
+                            style: GoogleFonts.inter(
+                                color: Colors.white, fontSize: 22),
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                        ],
+                      ),
+                    ),
+                    height: device_height * 0.1,
+                    width: device_width * 0.7,
+                    decoration: BoxDecoration(
+                      color: HexColor('#00478d'),
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(width: 2, color: HexColor('#E37B1F')),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+
+  SizedBox buildSizedBox() => SizedBox(
+        height: 20,
+      );
 }

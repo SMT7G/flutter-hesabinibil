@@ -22,7 +22,10 @@ class ThemeProvider extends ChangeNotifier {
     );
 
     if (isDark) {
-    _theme = ThemeData.dark();
+    _theme = ThemeData.dark().copyWith(
+      iconTheme: IconThemeData(color: Colors.black),
+
+    );
     } else {
     _theme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: Colors.blueGrey,

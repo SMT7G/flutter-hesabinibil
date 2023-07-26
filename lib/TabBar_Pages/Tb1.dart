@@ -176,88 +176,65 @@ class _Tb1State extends State<Tb1> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: PopupMenuButton(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Kategori Seç!",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    child: Image.asset(
-                                      "assets/yemek.png",
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
                                       height: 50,
-                                      width: 50,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10),
+                                          ),
+                                          color: Colors.grey),
+                                      child: Image.asset(
+                                        "assets/yemek.png",
+                                        height: 50,
+                                        width: 50,
+                                      ),
                                     ),
-                                    value: 1,
                                     onTap: () {
                                       setState(() {
                                         kategori_idd = 1;
                                       });
                                     },
                                   ),
-                                  PopupMenuItem(
-                                    child: Text("Yemek"),
-                                    onTap: () {
-                                      setState(() {
-                                        kategori_idd = 1;
-                                      });
-                                    },
-                                  ),
-                                  PopupMenuItem(
-                                    child: Divider(
-                                      color: Colors.black,
-                                      height: 2,
-                                      thickness: 2,
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    child: Image.asset(
-                                      "assets/muzik.png",
+                                  GestureDetector(
+                                    child: Container(
                                       height: 50,
-                                      width: 50,
+                                      width: 100,
+                                      decoration:
+                                          BoxDecoration(color: Colors.grey),
+                                      child: Image.asset(
+                                        "assets/muzik.png",
+                                        height: 30,
+                                        width: 30,
+                                      ),
                                     ),
-                                    value: 2,
                                     onTap: () {
                                       setState(() {
                                         kategori_idd = 2;
                                       });
                                     },
                                   ),
-                                  PopupMenuItem(
-                                    child: Text("Eğlence"),
-                                    onTap: () {
-                                      setState(() {
-                                        kategori_idd = 2;
-                                      });
-                                    },
-                                  ),
-                                  PopupMenuItem(
-                                    child: Divider(
-                                      color: Colors.black,
-                                      height: 2,
-                                      thickness: 2,
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    child: Image.asset(
-                                      "assets/araba.png",
+                                  GestureDetector(
+                                    child: Container(
                                       height: 50,
-                                      width: 50,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(10),
+                                            bottomRight: Radius.circular(10),
+                                          ),
+                                          color: Colors.grey),
+                                      child: Image.asset(
+                                        "assets/araba.png",
+                                        height: 50,
+                                        width: 50,
+                                      ),
                                     ),
-                                    value: 3,
-                                    onTap: () {
-                                      setState(() {
-                                        kategori_idd = 3;
-                                      });
-                                    },
-                                  ),
-                                  PopupMenuItem(
-                                    child: Text("Araç"),
                                     onTap: () {
                                       setState(() {
                                         kategori_idd = 3;
@@ -317,6 +294,12 @@ class _Tb1State extends State<Tb1> {
                                 (route) => false);
                             noteEkle(DateFormat("dd/MM/yyyy").format(_dateTime),
                                 tutar, kategori_idd, 0);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Gider kayıdı eklendi!"),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
                           },
                           child: Text(
                             "Kaydet",
@@ -343,3 +326,94 @@ class _Tb1State extends State<Tb1> {
     );
   }
 }
+
+//PopupMenuButton(
+//                                 child: Align(
+//                                   alignment: Alignment.center,
+//                                   child: Text(
+//                                     "Kategori Seç!",
+//                                     style: TextStyle(
+//                                         fontSize: 16,
+//                                         fontWeight: FontWeight.w500),
+//                                   ),
+//                                 ),
+//                                 itemBuilder: (context) => [
+//                                   PopupMenuItem(
+//                                     child: Image.asset(
+//                                       "assets/yemek.png",
+//                                       height: 50,
+//                                       width: 50,
+//                                     ),
+//                                     value: 1,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 1;
+//                                       });
+//                                     },
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Text("Yemek"),
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 1;
+//                                       });
+//                                     },
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Divider(
+//                                       color: Colors.black,
+//                                       height: 2,
+//                                       thickness: 2,
+//                                     ),
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Image.asset(
+//                                       "assets/muzik.png",
+//                                       height: 50,
+//                                       width: 50,
+//                                     ),
+//                                     value: 2,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 2;
+//                                       });
+//                                     },
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Text("Eğlence"),
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 2;
+//                                       });
+//                                     },
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Divider(
+//                                       color: Colors.black,
+//                                       height: 2,
+//                                       thickness: 2,
+//                                     ),
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Image.asset(
+//                                       "assets/araba.png",
+//                                       height: 50,
+//                                       width: 50,
+//                                     ),
+//                                     value: 3,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 3;
+//                                       });
+//                                     },
+//                                   ),
+//                                   PopupMenuItem(
+//                                     child: Text("Araç"),
+//                                     onTap: () {
+//                                       setState(() {
+//                                         kategori_idd = 3;
+//                                       });
+//                                     },
+//                                   ),
+//                                 ],
+//                               )

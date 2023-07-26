@@ -310,6 +310,12 @@ class _Tb2State extends State<Tb2> {
                                 (route) => false);
                             noteEkle(DateFormat("dd/MM/yyyy").format(_dateTime),
                                 tutar, kategori_idd, 0);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Gelir kayıdı eklendi!"),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
                           },
                           child: Text(
                             "Kaydet",

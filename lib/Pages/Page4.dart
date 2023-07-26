@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hesabini_bil_demo/Pages/email_page.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,20 @@ class _Page4State extends State<Page4> {
 
   bool Theme_Change = false;
 
+  List<String> _titles = [
+    "Ayarlar",
+    "Bize Ulaşın",
+    "Yardım",
+    "Hesaplar",
+  ];
+
+  List<Icon> _icons = [
+    Icon(Icons.settings),
+    Icon(Icons.email_outlined),
+    Icon(Icons.question_mark),
+    Icon(Icons.account_box),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context);
@@ -53,93 +68,110 @@ class _Page4State extends State<Page4> {
           ),
         ],
       ),
-      body: GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: 1,
-        mainAxisSpacing: 18,
-        crossAxisSpacing: 25,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              width: 100,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: GridView.count(
+          crossAxisCount: 3,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          children: [
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.settings_outlined,
-                      color: Colors.black,
-                      size: 65,
-                    ),
-                    Text(
-                      "Ayarlar",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.settings_outlined,
+                    size: 70,
+                  ),
+                  Text(
+                    "Ayarlar",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => email_page(),
+                ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(
                       Icons.email_outlined,
-                      size: 65,
-                      color: Colors.black,
+                      size: 70,
                     ),
                     Text(
-                      "İletişim",
+                      "Bize Ulaşın",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              width: 100,
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_box,
+                    size: 70,
+                  ),
+                  Text(
+                    "Hesaplar",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              width: 100,
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.question_mark_outlined,
+                    size: 70,
+                  ),
+                  Text(
+                    "Yardım",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

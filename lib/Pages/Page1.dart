@@ -44,16 +44,16 @@ class _Page1State extends State<Page1> {
     return liste;
   }
 
-  Future<void> favoriGuncelle(int id, String tutar) async {
-    await Hesapdao().favoriGuncelle(tutar, id);
+  Future<void> favoriGuncelle(int note_id, int id) async {
+    await Hesapdao().favoriGuncelle(note_id, id);
   }
 
-  Future<void> NoteSil(String tutar) async {
-    await Hesapdao().NoteSil(tutar);
+  Future<void> NoteSil(int note_id) async {
+    await Hesapdao().NoteSil(note_id);
   }
 
-  void sil(String tutar) {
-    NoteSil(tutar);
+  void sil(int id) {
+    NoteSil(id);
   }
 
   void _dateTimePicker() {
@@ -195,7 +195,7 @@ class _Page1State extends State<Page1> {
                         SlidableAction(
                           onPressed: (context) {
                             setState(() {
-                              sil("${note.tutar}");
+                              sil(note.note_id);
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -220,7 +220,7 @@ class _Page1State extends State<Page1> {
                         SlidableAction(
                           onPressed: (context) {
                             setState(() {
-                              favoriGuncelle(1, note.tutar);
+                              favoriGuncelle(note.note_id, note.id);
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

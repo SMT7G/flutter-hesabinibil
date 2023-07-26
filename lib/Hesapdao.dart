@@ -8,6 +8,7 @@ class Hesapdao {
     return List.generate(maps.length, (index) {
       var satir = maps[index];
       return Notes(
+        note_id: satir["note_id"],
         id: satir["id"],
         dateTime: satir["dateTime"],
         kategori: satir["kategori"],
@@ -19,10 +20,11 @@ class Hesapdao {
   Future<List<Notes>> son10veri() async {
     var db = await VeritabaniYoneticisi.veritabaniErisim();
     List<Map<String, dynamic>> maps =
-        await db.rawQuery("SELECT * FROM Notes ORDER BY tutar DESC LIMIT 10");
+        await db.rawQuery("SELECT * FROM Notes ORDER BY note_id DESC LIMIT 10");
     return List.generate(maps.length, (index) {
-      var satir = maps[index];
+      var satir = maps![index];
       return Notes(
+        note_id: satir["note_id"],
         id: satir["id"],
         dateTime: satir["dateTime"],
         kategori: satir["kategori"],
@@ -55,6 +57,7 @@ class Hesapdao {
     return List.generate(maps.length, (index) {
       var satir = maps[index];
       return Notes(
+        note_id: satir["note_id"],
         id: satir["id"],
         dateTime: satir["dateTime"],
         kategori: satir["kategori"],
@@ -63,17 +66,17 @@ class Hesapdao {
     });
   }
 
-  Future<void> favoriGuncelle(String tutar, int id) async {
+  Future<void> favoriGuncelle(int note_id, int id) async {
     var db = await VeritabaniYoneticisi.veritabaniErisim();
     var bilgiler = Map<String, dynamic>();
 
     bilgiler["id"] = id;
 
-    await db.update("Notes", bilgiler, where: "tutar = ?", whereArgs: [tutar]);
+    await db.update("Notes", bilgiler, where: "note_id = ?", whereArgs: [note_id]);
   }
 
-  Future<void> NoteSil(String tutar) async {
+  Future<void> NoteSil(int note_id) async {
     var db = await VeritabaniYoneticisi.veritabaniErisim();
-    await db.delete("Notes", where: "tutar = ?", whereArgs: [tutar]);
+    await db.delete("Notes", where: "note_id = ?", whereArgs: [note_id]);
   }
 }
