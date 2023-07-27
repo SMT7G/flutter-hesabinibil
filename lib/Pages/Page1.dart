@@ -30,7 +30,8 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
-  DateTime _dateTime = DateTime.now();
+  DateTime _dateTime = DateTime(2003, 6, 13);
+  DateTime _dateTime2 = DateTime.now();
 
   //Future<void> favorileriGetir() async {
   //  var liste = await Hesapdao().tumVeriler();
@@ -41,6 +42,11 @@ class _Page1State extends State<Page1> {
 
   Future<List<Notes>> son10Veri() async {
     var liste = await Hesapdao().son10veri();
+    return liste;
+  }
+
+  Future<List<Notes>> tarihArasi(String date1, String date2) async {
+    var liste = await Hesapdao().tarihArasi(date1, date2);
     return liste;
   }
 
@@ -59,12 +65,25 @@ class _Page1State extends State<Page1> {
   void _dateTimePicker() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(2003, 6, 13),
       firstDate: DateTime(2000),
       lastDate: DateTime(2050),
     ).then((value) {
       setState(() {
         _dateTime = value!;
+      });
+    });
+  }
+
+  void _dateTimePicker2() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2050),
+    ).then((value) {
+      setState(() {
+        _dateTime2 = value!;
       });
     });
   }
@@ -82,7 +101,15 @@ class _Page1State extends State<Page1> {
       appBar: AppBar(
         title: GestureDetector(
           onTap: _dateTimePicker,
-          child: appBarTheme(),
+          child: Row(
+            children: [
+              appBarTheme(_dateTime),
+              SizedBox(
+                width: 3,
+              ),
+              appBarTheme(_dateTime2),
+            ],
+          ),
         ),
         actions: [
           IconButton(
@@ -110,7 +137,7 @@ class _Page1State extends State<Page1> {
         ],
       ),
       body: FutureBuilder<List<Notes>>(
-        future: son10Veri(),
+        future: tarihArasi(_dateTime.toString(), _dateTime2.toString()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var NotesListesi = snapshot.data;
@@ -220,7 +247,7 @@ class _Page1State extends State<Page1> {
                         SlidableAction(
                           onPressed: (context) {
                             setState(() {
-                              favoriGuncelle(note.note_id, note.id);
+                              favoriGuncelle(note.note_id, 1);
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -266,16 +293,16 @@ class _Page1State extends State<Page1> {
     );
   }
 
-  Container appBarTheme() {
+  Container appBarTheme(DateTime date) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(width: 1, color: Colors.black),
         color: HexColor('#E37B1F'),
       ),
       child: Text(
-        "< ${_dateTime.year}-${_dateTime.day}-${_dateTime.month} >",
+        "< ${date.year}-${date.day}-${date.month} >",
         style: TextStyle(fontSize: 19),
       ),
     );

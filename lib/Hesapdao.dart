@@ -17,6 +17,22 @@ class Hesapdao {
     });
   }
 
+  Future<List<Notes>> tarihArasi(String date1, String date2) async {
+    var db = await VeritabaniYoneticisi.veritabaniErisim();
+    List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM Notes WHERE strftime('%Y-%m-%d', substr(datetime, 7, 4) || '-' || substr(datetime, 4, 2) || '-' || substr(datetime, 1, 2)) BETWEEN '${date1}' AND '${date2}'");
+    return List.generate(maps.length, (index) {
+      var satir = maps[index];
+      return Notes(
+        note_id: satir["note_id"],
+        id: satir["id"],
+        dateTime: satir["dateTime"],
+        kategori: satir["kategori"],
+        tutar: satir["tutar"],
+      );
+    });
+  }
+
   Future<List<Notes>> son10veri() async {
     var db = await VeritabaniYoneticisi.veritabaniErisim();
     List<Map<String, dynamic>> maps =
@@ -51,8 +67,8 @@ class Hesapdao {
 
   Future<List<Notes>> favoriGetir(int id) async {
     var db = await VeritabaniYoneticisi.veritabaniErisim();
-    List<Map<String, dynamic>> maps =
-        await db.rawQuery("SELECT * FROM Notes WHERE id = '$id'");
+    List<Map<String, dynamic>> maps = await db
+        .rawQuery("SELECT * FROM Notes WHERE id = ${id} ORDER BY rowid DESC");
 
     return List.generate(maps.length, (index) {
       var satir = maps[index];
@@ -72,7 +88,8 @@ class Hesapdao {
 
     bilgiler["id"] = id;
 
-    await db.update("Notes", bilgiler, where: "note_id = ?", whereArgs: [note_id]);
+    await db
+        .update("Notes", bilgiler, where: "note_id = ?", whereArgs: [note_id]);
   }
 
   Future<void> NoteSil(int note_id) async {
